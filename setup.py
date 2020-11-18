@@ -55,7 +55,7 @@ import sys
 import warnings
 from glob import glob
 
-from fail2ban.setup import updatePyExec
+from src.fail2ban.setup import updatePyExec
 
 
 source_dir = os.path.realpath(os.path.dirname(
@@ -135,7 +135,7 @@ class install_command_f2b(install):
 			cmdclass['build_py'] = build_py_2to3
 			cmdclass['build_scripts'] = build_scripts_2to3
 		if self.without_tests:
-			self.distribution.scripts.remove('bin/fail2ban-testcases')
+			self.distribution.scripts.remove('src/fail2ban-testcases')
 
 			self.distribution.packages.remove('fail2ban.tests')
 			self.distribution.packages.remove('fail2ban.tests.action_d')
@@ -147,7 +147,7 @@ class install_command_f2b(install):
 
 
 # Update fail2ban-python env to current python version (where f2b-modules located/installed)
-updatePyExec(os.path.join(source_dir, 'bin'))
+updatePyExec(os.path.join(source_dir, 'src'))
 
 if setuptools and "test" in sys.argv:
 	import logging
@@ -204,7 +204,7 @@ if platform_system in ('linux', 'solaris', 'sunos') or platform_system.startswit
 
 # Get version number, avoiding importing fail2ban.
 # This is due to tests not functioning for python3 as 2to3 takes place later
-exec(open(join("fail2ban", "version.py")).read())
+exec(open(join("src", "fail2ban", "version.py")).read())
 
 setup(
 	name = "fail2ban",
@@ -221,12 +221,19 @@ setup(
 		'install_scripts': install_scripts_f2b, 'install': install_command_f2b
 	},
 	scripts = [
-		'bin/fail2ban-client',
-		'bin/fail2ban-server',
-		'bin/fail2ban-regex',
-		'bin/fail2ban-testcases',
-		# 'bin/fail2ban-python', -- link (binary), will be installed via install_scripts_f2b wrapper
+		'src/fail2ban-client',
+		'src/fail2ban-server',
+		'src/fail2ban-regex',
+		'src/fail2ban-testcases',
+		# 'src/fail2ban-python', -- link (binary), will be installed via install_scripts_f2b wrapper
 	],
+    package_dir = {
+        'fail2ban': 'src/fail2ban',
+        'fail2ban.client': 'src/fail2ban/client',
+        'fail2ban.server': 'src/fail2ban/server',
+        'fail2ban.tests': 'src/fail2ban/tests',
+        'fail2ban.tests.action_d': 'src/fail2ban/tests/action_d',
+    },
 	packages = [
 		'fail2ban',
 		'fail2ban.client',

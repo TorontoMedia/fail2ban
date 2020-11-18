@@ -3,7 +3,7 @@
 branch = True
 source =
     config
-    fail2ban
+    src/fail2ban
 
 [report]
 exclude_lines =

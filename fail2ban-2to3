@@ -5,7 +5,7 @@
 
 set -eu
 
-if 2to3 -w --no-diffs bin/* fail2ban;then
+if 2to3 -w --no-diffs src;then
   echo "Success!" >&2
   exit 0
 else
