@@ -256,7 +256,7 @@ class TestsUtilsTest(LogCaptureTestCase):
 					func_raise()
 
 			try:
-				print deep_function(3)
+				print(deep_function(3))
 			except ValueError:
 				s = tb()
 

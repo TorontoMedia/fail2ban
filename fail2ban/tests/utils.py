@@ -171,8 +171,8 @@ def initProcess(opts):
 
 	# Let know the version
 	if opts.verbosity != 0:
-		print("Fail2ban %s test suite. Python %s. Please wait..." \
-				% (version, str(sys.version).replace('\n', '')))
+		print(("Fail2ban %s test suite. Python %s. Please wait..." \
+				% (version, str(sys.version).replace('\n', ''))))
 
 	return opts;
 
