@@ -1018,7 +1018,7 @@ filter = testfilter1
 		self.assertEqual(add_actions[-1][-1], "{}")
 
 	def testLogPathFileFilterBackend(self):
-		self.assertRaisesRegexp(ValueError, r"Have not found any log file for .* jail", 
+		self.assertRaisesRegex(ValueError, r"Have not found any log file for .* jail", 
 			self._testLogPath, backend='polling')
 
 	def testLogPathSystemdBackend(self):

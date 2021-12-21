@@ -531,8 +531,8 @@ def gatherTests(regexps=None, opts=None):
 import difflib, pprint
 if not hasattr(unittest.TestCase, 'assertDictEqual'):
 	def assertDictEqual(self, d1, d2, msg=None):
-		self.assert_(isinstance(d1, dict), 'First argument is not a dictionary')
-		self.assert_(isinstance(d2, dict), 'Second argument is not a dictionary')
+		self.assertTrue(isinstance(d1, dict), 'First argument is not a dictionary')
+		self.assertTrue(isinstance(d2, dict), 'Second argument is not a dictionary')
 		if d1 != d2:
 			standardMsg = '%r != %r' % (d1, d2)
 			diff = ('\n' + '\n'.join(difflib.ndiff(
@@ -605,7 +605,7 @@ if not hasattr(unittest.TestCase, 'assertRaisesRegexp'):
 				self.fail('\"%s\" does not match \"%s\"' % (regexp, e))
 		else:
 			self.fail('%s not raised' % getattr(exccls, '__name__'))
-	unittest.TestCase.assertRaisesRegexp = assertRaisesRegexp
+	unittest.TestCase.assertRaisesRegex = assertRaisesRegexp
 
 # always custom following methods, because we use atm better version of both (support generators)
 if True: ## if not hasattr(unittest.TestCase, 'assertIn'):

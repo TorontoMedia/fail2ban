@@ -273,7 +273,7 @@ class TestsUtilsTest(LogCaptureTestCase):
 			self.assertIn(':', s)
 
 	def _testAssertionErrorRE(self, regexp, fun, *args, **kwargs):
-		self.assertRaisesRegexp(AssertionError, regexp, fun, *args, **kwargs)
+		self.assertRaisesRegex(AssertionError, regexp, fun, *args, **kwargs)
 	
 	def testExtendedAssertRaisesRE(self):
 		## test _testAssertionErrorRE several fail cases:
