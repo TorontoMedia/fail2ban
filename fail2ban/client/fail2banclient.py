@@ -45,7 +45,7 @@ def _thread_name():
 	return threading.current_thread().__class__.__name__
 
 def input_command(): # pragma: no cover
-	return raw_input(PROMPT)
+	return input(PROMPT)
 
 ##
 #
