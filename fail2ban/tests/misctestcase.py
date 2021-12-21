@@ -31,7 +31,7 @@ import fnmatch
 from glob import glob
 from StringIO import StringIO
 
-from utils import LogCaptureTestCase, logSys as DefLogSys
+from .utils import LogCaptureTestCase, logSys as DefLogSys
 
 from ..helpers import formatExceptionInfo, mbasename, TraceBack, FormatterWithTraceBack, getLogger, \
 	getVerbosityFormat, splitwords, uni_decode, uni_string

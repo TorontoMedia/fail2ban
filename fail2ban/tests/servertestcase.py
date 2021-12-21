@@ -1185,7 +1185,7 @@ class LoggingTests(LogCaptureTestCase):
 					os.remove(f)
 
 
-from clientreadertestcase import ActionReader, JailsReader, CONFIG_DIR
+from .clientreadertestcase import ActionReader, JailsReader, CONFIG_DIR
 
 class ServerConfigReaderTests(LogCaptureTestCase):
 
