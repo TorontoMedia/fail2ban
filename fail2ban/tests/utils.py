@@ -303,7 +303,7 @@ def initTests(opts):
 	c.clear = lambda: logSys.warn('clear CACHE_ipToName is disabled in test suite')
 	# increase max count and max time (too many entries, long time testing):
 	c.setOptions(maxCount=10000, maxTime=5*60)
-	for i in xrange(256):
+	for i in range(256):
 		c.set('192.0.2.%s' % i, None)
 		c.set('198.51.100.%s' % i, None)
 		c.set('203.0.113.%s' % i, None)

@@ -551,7 +551,7 @@ class IPAddr(object):
 		m4 = (1 << 32)-1
 		mmap = {m6: 128, m4: 32, 0: 0}
 		m = 0
-		for i in xrange(0, 128):
+		for i in range(0, 128):
 			m |= 1 << i
 			if i < 32:
 				mmap[m ^ m4] = 32-1-i

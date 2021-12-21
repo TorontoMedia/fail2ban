@@ -930,7 +930,7 @@ class TransmitterLogging(TransmitterBase):
 
 	def testLogTarget(self):
 		logTargets = []
-		for _ in xrange(3):
+		for _ in range(3):
 			tmpFile = tempfile.mkstemp("fail2ban", "transmitter")
 			logTargets.append(tmpFile[1])
 			os.close(tmpFile[0])
