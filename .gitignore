@@ -10,3 +10,7 @@ htmlcov
 __pycache__
 .vagrant/
 .idea/
+.vs/
+.vscode/
+fail2ban.egg-info/
+fail2ban-python
