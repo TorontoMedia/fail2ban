@@ -1775,7 +1775,7 @@ class GetFailures(LogCaptureTestCase):
 	def testGetFailures02(self):
 		output = ('141.3.81.106', 4, 1124013539.0,
 				  [u'Aug 14 11:%d:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:141.3.81.106 port 51332 ssh2'
-				   % m for m in 53, 54, 57, 58])
+				   % m for m in (53, 54, 57, 58)])
 
 		self.filter.setMaxRetry(4)
 		self.filter.addLogPath(GetFailures.FILENAME_02, autoSeek=0)
