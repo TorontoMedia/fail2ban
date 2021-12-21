@@ -31,6 +31,7 @@ import traceback
 from threading import Lock
 
 from .server.mytime import MyTime
+import importlib
 
 try:
 	import ctypes
@@ -63,7 +64,7 @@ if sys.version_info < (3,): # pragma: 3.x no cover
 					from imp import load_dynamic as __ldm
 					_sys = __ldm('_sys', 'sys')
 				except ImportError: # pragma: no cover - only if load_dynamic fails
-					reload(sys)
+					importlib.reload(sys)
 					_sys = sys
 			if hasattr(_sys, "setdefaultencoding"):
 				_sys.setdefaultencoding(encoding)
