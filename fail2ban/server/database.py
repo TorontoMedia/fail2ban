@@ -73,7 +73,7 @@ else: # pragma: 3.x no cover
 		elif isinstance(x, unicode):
 			# in 2.x default text_factory is unicode - so return proper unicode here:
 			return x.encode(PREFER_ENC, 'replace').decode(PREFER_ENC)
-		elif isinstance(x, basestring):
+		elif isinstance(x, str):
 			return x.decode(PREFER_ENC, 'replace')
 		return x
 

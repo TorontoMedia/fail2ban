@@ -88,7 +88,7 @@ class Ticket(object):
 
 	def setID(self, value):
 		# guarantee using IPAddr instead of unicode, str for the IP
-		if isinstance(value, basestring):
+		if isinstance(value, str):
 			value = IPAddr(value)
 		self._id = value
 	

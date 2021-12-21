@@ -2273,7 +2273,7 @@ class DNSUtilsNetworkTests(unittest.TestCase):
 			'2606:2800:220:1:248:1893:25c8:1946': 'ip6-test'
 		}
 		d2 = dict([(IPAddr(k), v) for k, v in d.iteritems()])
-		self.assertTrue(isinstance(d.keys()[0], basestring))
+		self.assertTrue(isinstance(d.keys()[0], str))
 		self.assertTrue(isinstance(d2.keys()[0], IPAddr))
 		self.assertEqual(d.get(ip4[2], ''), 'ip4-test')
 		self.assertEqual(d.get(ip6[2], ''), 'ip6-test')

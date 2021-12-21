@@ -118,7 +118,7 @@ else: # pragma: 3.x no cover
 
 
 def _as_bool(val):
-	return bool(val) if not isinstance(val, basestring) \
+	return bool(val) if not isinstance(val, str) \
 		else val.lower() in ('1', 'on', 'true', 'yes')
 
 
@@ -484,7 +484,7 @@ def substituteRecursiveTags(inptags, conditional='',
 					m = tre_search(value, m.end())
 					continue
 				# if calling map - be sure we've string:
-				if not isinstance(repl, basestring): repl = uni_string(repl)
+				if not isinstance(repl, str): repl = uni_string(repl)
 				value = value.replace('<%s>' % rtag, repl)
 				#logSys.log(5, 'value now: %s' % value)
 				# increment reference count:

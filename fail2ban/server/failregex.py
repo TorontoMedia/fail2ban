@@ -247,7 +247,7 @@ class Regex:
 	
 	def search(self, tupleLines, orgLines=None):
 		buf = tupleLines
-		if not isinstance(tupleLines, basestring):
+		if not isinstance(tupleLines, str):
 			buf = Regex._tupleLinesBuf(tupleLines)
 		self._matchCache = self._regexObj.search(buf)
 		if self._matchCache:

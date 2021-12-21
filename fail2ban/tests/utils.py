@@ -612,7 +612,7 @@ if True: ## if not hasattr(unittest.TestCase, 'assertIn'):
 	def assertIn(self, a, b, msg=None):
 		bb = b
 		wrap = False
-		if msg is None and hasattr(b, '__iter__') and not isinstance(b, basestring):
+		if msg is None and hasattr(b, '__iter__') and not isinstance(b, str):
 			b, bb = itertools.tee(b)
 			wrap = True
 		if a not in b:
@@ -623,7 +623,7 @@ if True: ## if not hasattr(unittest.TestCase, 'assertIn'):
 	def assertNotIn(self, a, b, msg=None):
 		bb = b
 		wrap = False
-		if msg is None and hasattr(b, '__iter__') and not isinstance(b, basestring):
+		if msg is None and hasattr(b, '__iter__') and not isinstance(b, str):
 			b, bb = itertools.tee(b)
 			wrap = True
 		if a in b:

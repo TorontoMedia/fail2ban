@@ -72,7 +72,7 @@ class CSocket:
 	@staticmethod
 	def convert(m):
 		"""Convert every "unexpected" member of message to string"""
-		if isinstance(m, (basestring, bool, int, float, list, dict, set)):
+		if isinstance(m, (str, bool, int, float, list, dict, set)):
 			return m
 		else: # pragma: no cover
 			return str(m)

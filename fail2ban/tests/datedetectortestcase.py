@@ -529,7 +529,7 @@ class CustomDateFormatsTest(unittest.TestCase):
 			date = dd.getTime(line)
 			if matched:
 				self.assertTrue(date)
-				if isinstance(matched, basestring):
+				if isinstance(matched, str):
 					self.assertEqual(matched, date[1].group(1))
 				else:
 					self.assertEqual(matched, date[0])
@@ -564,7 +564,7 @@ class CustomDateFormatsTest(unittest.TestCase):
 			date = dd.getTime(line)
 			if matched:
 				self.assertTrue(date)
-				if isinstance(matched, basestring): # pragma: no cover
+				if isinstance(matched, str): # pragma: no cover
 					self.assertEqual(matched, date[1].group(1))
 				else:
 					self.assertEqual(matched, date[0])

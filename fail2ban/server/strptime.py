@@ -171,7 +171,7 @@ def zone2offset(tz, dt):
 	"""
 	if isinstance(tz, int):
 		return tz
-	if isinstance(tz, basestring):
+	if isinstance(tz, str):
 		return validateTimeZone(tz)
 	tz, tzo = tz
 	if tzo is None or tzo == '': # without offset

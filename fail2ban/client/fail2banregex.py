@@ -532,7 +532,7 @@ class Fail2banRegex(object):
 			def _out(ret):
 				for r in ret:
 					for r in r[3].get('matches'):
-						if not isinstance(r, basestring):
+						if not isinstance(r, str):
 							r = ''.join(r for r in r)
 						output(r)
 		elif ofmt == 'row':
@@ -573,7 +573,7 @@ class Fail2banRegex(object):
 				# wrap multiline tag (msg) interpolations to single line:
 				for r, v in rows:
 					for r in r[3].get('matches'):
-						if not isinstance(r, basestring):
+						if not isinstance(r, str):
 							r = ''.join(r for r in r)
 						r = v.replace("\x00msg\x00", r)
 						output(r)

@@ -67,7 +67,7 @@ class DatabaseTest(LogCaptureTestCase):
 
 	@property
 	def db(self):
-		if isinstance(self._db, basestring) and self._db == ':auto-create-in-memory:':
+		if isinstance(self._db, str) and self._db == ':auto-create-in-memory:':
 			self._db = getFail2BanDb(self.dbFilename)
 		return self._db
 	@db.setter
