@@ -182,7 +182,7 @@ class CallingMap(MutableMapping, object):
 		return self.__class__(_merge_copy_dicts(self.data, self.storage))
 
 
-class ActionBase(object):
+class ActionBase(object, metaclass=ABCMeta):
 	"""An abstract base class for actions in Fail2Ban.
 
 	Action Base is a base definition of what methods need to be in
@@ -212,7 +212,6 @@ class ActionBase(object):
 	Any additional arguments specified in `jail.conf` or passed
 	via `fail2ban-client` will be passed as keyword arguments.
 	"""
-	__metaclass__ = ABCMeta
 
 	@classmethod
 	def __subclasshook__(cls, C):
