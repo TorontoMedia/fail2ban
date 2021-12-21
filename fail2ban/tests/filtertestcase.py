@@ -319,11 +319,11 @@ class BasicFilter(unittest.TestCase):
 
 	def testWrongCharInTupleLine(self):
 		## line tuple has different types (ascii after ascii / unicode):
-		for a1 in ('', u'', b''):
-			for a2 in ('2016-09-05T20:18:56', u'2016-09-05T20:18:56', b'2016-09-05T20:18:56'):
+		for a1 in ('', '', b''):
+			for a2 in ('2016-09-05T20:18:56', '2016-09-05T20:18:56', b'2016-09-05T20:18:56'):
 				for a3 in (
 					'Fail for "g\xc3\xb6ran" from 192.0.2.1', 
-					u'Fail for "g\xc3\xb6ran" from 192.0.2.1',
+					'Fail for "g\xc3\xb6ran" from 192.0.2.1',
 					b'Fail for "g\xc3\xb6ran" from 192.0.2.1'
 				):
 					# join should work if all arguments have the same type:
@@ -673,7 +673,7 @@ class LogFile(LogCaptureTestCase):
 
 	def testDecodeLineWarn(self):
 		# incomplete line (missing byte at end), warning is suppressed:
-		l = u"correct line\n"
+		l = "correct line\n"
 		r = l.encode('utf-16le')
 		self.assertEqual(FileContainer.decode_line('TESTFILE', 'utf-16le', r), l)
 		self.assertEqual(FileContainer.decode_line('TESTFILE', 'utf-16le', r[0:-1]), l[0:-1])
@@ -1634,10 +1634,10 @@ def get_monitor_failures_journal_testcase(Filter_): # pragma: systemd no cover
 			# Add direct utf, unicode, blob:
 			for l in (
 		    "error: PAM: Authentication failure for \xe4\xf6\xfc\xdf from 192.0.2.1",
-		   u"error: PAM: Authentication failure for \xe4\xf6\xfc\xdf from 192.0.2.1",
+		   "error: PAM: Authentication failure for \xe4\xf6\xfc\xdf from 192.0.2.1",
 		   b"error: PAM: Authentication failure for \xe4\xf6\xfc\xdf from 192.0.2.1".decode('utf-8', 'replace'),
 		    "error: PAM: Authentication failure for \xc3\xa4\xc3\xb6\xc3\xbc\xc3\x9f from 192.0.2.2",
-		   u"error: PAM: Authentication failure for \xc3\xa4\xc3\xb6\xc3\xbc\xc3\x9f from 192.0.2.2",
+		   "error: PAM: Authentication failure for \xc3\xa4\xc3\xb6\xc3\xbc\xc3\x9f from 192.0.2.2",
 		   b"error: PAM: Authentication failure for \xc3\xa4\xc3\xb6\xc3\xbc\xc3\x9f from 192.0.2.2".decode('utf-8', 'replace')
 			):
 				fields = self.journal_fields
@@ -1666,7 +1666,7 @@ class GetFailures(LogCaptureTestCase):
 
 	# so that they could be reused by other tests
 	FAILURES_01 = ('193.168.0.128', 3, 1124013599.0,
-				  [u'Aug 14 11:59:59 [sshd] error: PAM: Authentication failure for kevin from 193.168.0.128']*3)
+				  ['Aug 14 11:59:59 [sshd] error: PAM: Authentication failure for kevin from 193.168.0.128']*3)
 
 	def setUp(self):
 		"""Call before every test case."""
@@ -1752,8 +1752,8 @@ class GetFailures(LogCaptureTestCase):
 				# test on unicode string containing \x0A as part of uni-char,
 				# it must produce exactly 2 lines (both are failures):
 				for l in (
-					u'%s \u20AC Failed auth: invalid user Test\u020A from 192.0.2.1\n' % tm,
-					u'%s \u20AC Failed auth: invalid user TestI from 192.0.2.2\n' % tm
+					'%s \u20AC Failed auth: invalid user Test\u020A from 192.0.2.1\n' % tm,
+					'%s \u20AC Failed auth: invalid user TestI from 192.0.2.2\n' % tm
 				):
 					fout.write(l.encode(enc))
 				fout.close()
@@ -1774,7 +1774,7 @@ class GetFailures(LogCaptureTestCase):
 
 	def testGetFailures02(self):
 		output = ('141.3.81.106', 4, 1124013539.0,
-				  [u'Aug 14 11:%d:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:141.3.81.106 port 51332 ssh2'
+				  ['Aug 14 11:%d:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:141.3.81.106 port 51332 ssh2'
 				   % m for m in (53, 54, 57, 58)])
 
 		self.filter.setMaxRetry(4)
@@ -1886,19 +1886,19 @@ class GetFailures(LogCaptureTestCase):
 		# We should still catch failures with usedns = no ;-)
 		output_yes = (
 			('93.184.216.34', 1, 1124013299.0,
-			  [u'Aug 14 11:54:59 i60p295 sshd[12365]: Failed publickey for roehl from example.com port 51332 ssh2']
+			  ['Aug 14 11:54:59 i60p295 sshd[12365]: Failed publickey for roehl from example.com port 51332 ssh2']
 			),
 			('93.184.216.34', 1, 1124013539.0,
-			  [u'Aug 14 11:58:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:93.184.216.34 port 51332 ssh2']
+			  ['Aug 14 11:58:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:93.184.216.34 port 51332 ssh2']
 			),
 			('2606:2800:220:1:248:1893:25c8:1946', 1, 1124013299.0,
-			  [u'Aug 14 11:54:59 i60p295 sshd[12365]: Failed publickey for roehl from example.com port 51332 ssh2']
+			  ['Aug 14 11:54:59 i60p295 sshd[12365]: Failed publickey for roehl from example.com port 51332 ssh2']
 			),
 		)
 
 		output_no = (
 			('93.184.216.34', 1, 1124013539.0,
-			  [u'Aug 14 11:58:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:93.184.216.34 port 51332 ssh2']
+			  ['Aug 14 11:58:59 i60p295 sshd[12365]: Failed publickey for roehl from ::ffff:93.184.216.34 port 51332 ssh2']
 			)
 		)
 

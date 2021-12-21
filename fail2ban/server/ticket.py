@@ -200,7 +200,7 @@ class Ticket(object):
 		# return default if not exists:
 		if not self._data:
 			return default
-		if not isinstance(key,(str,unicode,type(None),int,float,bool,complex)):
+		if not isinstance(key,(str,str,type(None),int,float,bool,complex)):
 			# return filtered by lambda/function:
 			if callable(key):
 				# todo: if support >= 2.7 only:

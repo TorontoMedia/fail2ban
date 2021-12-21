@@ -102,7 +102,7 @@ if sys.version_info >= (3,): # pragma: 2.x no cover
 else: # pragma: 3.x no cover
 	def uni_decode(x, enc=PREFER_ENC, errors='strict'):
 		try:
-			if isinstance(x, unicode):
+			if isinstance(x, str):
 				return x.encode(enc, errors)
 			return x
 		except (UnicodeDecodeError, UnicodeEncodeError): # pragma: no cover - unsure if reachable
@@ -111,7 +111,7 @@ else: # pragma: 3.x no cover
 			return x.encode(enc, 'replace')
 	if sys.getdefaultencoding().upper() != 'UTF-8': # pragma: no cover - utf-8 is default encoding now
 		def uni_string(x):
-			if not isinstance(x, unicode):
+			if not isinstance(x, str):
 				return str(x)
 			return x.encode(PREFER_ENC, 'replace')
 	else:

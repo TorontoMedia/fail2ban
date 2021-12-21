@@ -67,7 +67,7 @@ class HelpersTest(unittest.TestCase):
 		self.assertEqual(splitwords(' 1\n  2'), ['1', '2'])
 		self.assertEqual(splitwords(' 1\n  2, 3'), ['1', '2', '3'])
 		# string as unicode:
-		self.assertEqual(splitwords(u' 1\n  2, 3'), ['1', '2', '3'])
+		self.assertEqual(splitwords(' 1\n  2, 3'), ['1', '2', '3'])
 
 
 def _sh_call(cmd):
@@ -191,12 +191,12 @@ class TestsUtilsTest(LogCaptureTestCase):
 
 	def testUniConverters(self):
 		self.assertRaises(Exception, uni_decode, 
-			(b'test' if sys.version_info >= (3,) else u'test'), 'f2b-test::non-existing-encoding')
-		uni_decode((b'test\xcf' if sys.version_info >= (3,) else u'test\xcf'))
+			(b'test' if sys.version_info >= (3,) else 'test'), 'f2b-test::non-existing-encoding')
+		uni_decode((b'test\xcf' if sys.version_info >= (3,) else 'test\xcf'))
 		uni_string(b'test\xcf')
 		uni_string('test\xcf')
 		if sys.version_info < (3,) and 'PyPy' not in sys.version:
-			uni_string(u'test\xcf')
+			uni_string('test\xcf')
 
 	def testSafeLogging(self):
 		# logging should be exception-safe, to avoid possible errors (concat, str. conversion, representation failures, etc)
@@ -208,7 +208,7 @@ class TestsUtilsTest(LogCaptureTestCase):
 				if self.err:
 					raise Exception('no represenation for test!')
 				else:
-					return u'conv-error (\xf2\xf0\xe5\xf2\xe8\xe9), unterminated utf \xcf'
+					return 'conv-error (\xf2\xf0\xe5\xf2\xe8\xe9), unterminated utf \xcf'
 		test = Test()
 		logSys.log(logging.NOTICE, "test 1a: %r", test)
 		self.assertLogged("Traceback", "no represenation for test!")
