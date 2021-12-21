@@ -326,8 +326,8 @@ def initTests(opts):
 			('failed.dns.ch', set()),
 			('doh1.2.3.4.buga.xxxxx.yyy.invalid', set()),
 			('1.2.3.4.buga.xxxxx.yyy.invalid', set()),
-			('example.com', set([IPAddr('2606:2800:220:1:248:1893:25c8:1946'), IPAddr('93.184.216.34')])),
-			('www.example.com', set([IPAddr('2606:2800:220:1:248:1893:25c8:1946'), IPAddr('93.184.216.34')])),
+			('example.com', {IPAddr('2606:2800:220:1:248:1893:25c8:1946'), IPAddr('93.184.216.34')}),
+			('www.example.com', {IPAddr('2606:2800:220:1:248:1893:25c8:1946'), IPAddr('93.184.216.34')}),
 		):
 			c.set(*i)
 		# if fast - precache all host names as localhost addresses (speed-up getSelfIPs/ignoreself):

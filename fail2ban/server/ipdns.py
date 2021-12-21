@@ -179,9 +179,9 @@ class DNSUtils:
 		names = DNSUtils.CACHE_ipToName.get(DNSUtils._getSelfNames_key)
 		# get it using different ways (a set with names of localhost, hostname, fully qualified):
 		if names is None:
-			names = set([
+			names = {
 				'localhost', DNSUtils.getHostname(False), DNSUtils.getHostname(True)
-			]) - set(['']) # getHostname can return ''
+			} - {''} # getHostname can return ''
 		# cache and return :
 		DNSUtils.CACHE_ipToName.set(DNSUtils._getSelfNames_key, names)
 		return names

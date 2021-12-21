@@ -159,4 +159,4 @@ class SMTPActionTest(unittest.TestCase):
 		self.assertEqual(self.smtpd.mailfrom, "test@example.com")
 		self.assertTrue("From: %s <%s>" %
 			(self.action.fromname, self.action.fromaddr) in self.smtpd.data)
-		self.assertEqual(set(self.smtpd.rcpttos), set(["test@example.com", "test2@example.com"]))
+		self.assertEqual(set(self.smtpd.rcpttos), {"test@example.com", "test2@example.com"})

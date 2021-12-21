@@ -578,13 +578,13 @@ class ObserverTest(LogCaptureTestCase):
 		# wait for idle
 		obs.wait_idle(1)
 		# observer will replace test set:
-		o = set(['test'])
+		o = {'test'}
 		obs.add('call', o.clear)
 		obs.add('call', o.add, 'test2')
 		# wait for observer ready:
 		obs.wait_empty(1)
 		self.assertFalse(obs.is_full)
-		self.assertEqual(o, set(['test2']))
+		self.assertEqual(o, {'test2'})
 		# observer makes pause
 		obs.paused = True
 		# observer will replace test set, but first after pause ends:
@@ -592,11 +592,11 @@ class ObserverTest(LogCaptureTestCase):
 		obs.add('call', o.add, 'test3')
 		obs.wait_empty(10 * Utils.DEFAULT_SLEEP_TIME)
 		self.assertTrue(obs.is_full)
-		self.assertEqual(o, set(['test2']))
+		self.assertEqual(o, {'test2'})
 		obs.paused = False
 		# wait running:
 		obs.wait_empty(1)
-		self.assertEqual(o, set(['test3']))
+		self.assertEqual(o, {'test3'})
 
 		self.assertTrue(obs.isActive())
 		self.assertTrue(obs.isAlive())

@@ -781,7 +781,7 @@ class JailsReaderTest(LogCaptureTestCase):
 					msg="Action file %r is lacking actionban" % actionConfig)
 				# test name of jail is set in options (also if not supplied within parameters):
 				opts = actionReader.getCombined(
-					ignore=CommandAction._escapedTags | set(('timeout', 'bantime')))
+					ignore=CommandAction._escapedTags | {'timeout', 'bantime'})
 				self.assertEqual(opts.get('name'), 'TEST',
 					msg="Action file %r does not contains jail-name 'f2b-TEST'" % actionConfig)
 				# and the name is substituted (test several actions surely contains name-interpolation):

@@ -313,7 +313,7 @@ class CommandAction(ActionBase):
 	timeout
 	"""
 
-	_escapedTags = set(('matches', 'ipmatches', 'ipjailmatches'))
+	_escapedTags = {'matches', 'ipmatches', 'ipjailmatches'}
 
 	def clearAllParams(self):
 		""" Clear all lists/dicts parameters (used by reloading)

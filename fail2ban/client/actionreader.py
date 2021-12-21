@@ -83,7 +83,7 @@ class ActionReader(DefinitionInitConfigReader):
 
 	def convert(self):
 		opts = self.getCombined(
-			ignore=CommandAction._escapedTags | set(('timeout', 'bantime')))
+			ignore=CommandAction._escapedTags | {'timeout', 'bantime'})
 		# stream-convert:
 		head = ["set", self._jailName]
 		stream = list()

@@ -137,7 +137,7 @@ class DatabaseTest(LogCaptureTestCase):
 				if truncSize == 14000: # restored:
 					self.assertLogged("Repair seems to be successful",
 						"Check integrity", "Database updated", all=True)
-					self.assertEqual(self.db.getLogPaths(), set(['/tmp/Fail2BanDb_pUlZJh.log']))
+					self.assertEqual(self.db.getLogPaths(), {'/tmp/Fail2BanDb_pUlZJh.log'})
 					self.assertEqual(len(self.db.getJailNames()), 1)
 				else: # recreated:
 					self.assertLogged("Repair seems to be failed",
@@ -157,8 +157,8 @@ class DatabaseTest(LogCaptureTestCase):
 			shutil.copyfile(
 				os.path.join(TEST_FILES_DIR, 'database_v1.db'), self.dbFilename)
 			self.db = Fail2BanDb(self.dbFilename)
-			self.assertEqual(self.db.getJailNames(), set(['DummyJail #29162448 with 0 tickets']))
-			self.assertEqual(self.db.getLogPaths(), set(['/tmp/Fail2BanDb_pUlZJh.log']))
+			self.assertEqual(self.db.getJailNames(), {'DummyJail #29162448 with 0 tickets'})
+			self.assertEqual(self.db.getLogPaths(), {'/tmp/Fail2BanDb_pUlZJh.log'})
 			ticket = FailTicket("127.0.0.1", 1388009242.26, [u"abc\n"])
 			self.assertEqual(self.db.getBans()[0], ticket)
 
@@ -179,8 +179,8 @@ class DatabaseTest(LogCaptureTestCase):
 		shutil.copyfile(
 			os.path.join(TEST_FILES_DIR, 'database_v2.db'), self.dbFilename)
 		self.db = Fail2BanDb(self.dbFilename)
-		self.assertEqual(self.db.getJailNames(), set(['pam-generic']))
-		self.assertEqual(self.db.getLogPaths(), set(['/var/log/auth.log']))
+		self.assertEqual(self.db.getJailNames(), {'pam-generic'})
+		self.assertEqual(self.db.getLogPaths(), {'/var/log/auth.log'})
 		bans = self.db.getBans()
 		self.assertEqual(len(bans), 2)
 		# compare first ticket completely:
@@ -382,10 +382,10 @@ class DatabaseTest(LogCaptureTestCase):
 		self.testAddJail()
 		maxMatches = 2
 		failures = [
-			{"matches": ["abc\n"], "user": set(['test'])},
-			{"matches": ["123\n"], "user": set(['test'])},
-			{"matches": ["ABC\n"], "user": set(['test', 'root'])},
-			{"matches": ["1234\n"], "user": set(['test', 'root'])},
+			{"matches": ["abc\n"], "user": {'test'}},
+			{"matches": ["123\n"], "user": {'test'}},
+			{"matches": ["ABC\n"], "user": {'test', 'root'}},
+			{"matches": ["1234\n"], "user": {'test', 'root'}},
 		]
 		matches2find = [f["matches"][0] for f in failures]
 		# add failures sequential:
@@ -404,7 +404,7 @@ class DatabaseTest(LogCaptureTestCase):
 		self.assertEqual(ticket.getMatches(), matches2find[-maxMatches:])
     # add more failures at once:
 		ticket = FailTicket("127.0.0.1", MyTime.time() - 10, matches2find,
-			data={"user": set(['test', 'root'])})
+			data={"user": {'test', 'root'}})
 		ticket.setAttempt(len(failures))
 		self.db.addBan(self.jail, ticket)
 		# should retrieve 2 matches only, but count of all attempts:
