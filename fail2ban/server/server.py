@@ -612,8 +612,7 @@ class Server:
 	def status(self):
 		try:
 			self.__lock.acquire()
-			jails = list(self.__jails)
-			jails.sort()
+			jails = sorted(self.__jails)
 			jailList = ", ".join(jails)
 			ret = [("Number of jail", len(self.__jails)),
 				   ("Jail list", jailList)]

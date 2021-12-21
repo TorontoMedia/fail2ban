@@ -1493,7 +1493,7 @@ class FileContainer:
 			if l == r:
 				# try to fill buffer in order to find line-end in log encoding:
 				fnd = 0
-				while 1:
+				while True:
 					r = self.__handler.readline()
 					if not r:
 						break
