@@ -444,7 +444,7 @@ def substituteRecursiveTags(inptags, conditional='',
 	while True:
 		repFlag = False
 		# substitute each value:
-		for tag in tags.iterkeys():
+		for tag in tags.keys():
 			# ignore escaped or already done (or in ignore list):
 			if tag in ignore or tag in done: continue
 			# ignore replacing callable items from calling map - should be converted on demand only (by get):

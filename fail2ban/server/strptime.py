@@ -116,7 +116,7 @@ def _updateTimeRE():
 _updateTimeRE()
 
 def getTimePatternRE():
-	keys = timeRE.keys()
+	keys = list(timeRE.keys())
 	patt = (r"%%(%%|%s|[%s])" % (
 		"|".join([k for k in keys if len(k) > 1]),
 		"".join([k for k in keys if len(k) == 1]),
@@ -208,7 +208,7 @@ def reGroupDictStrptime(found_dict, msec=False, default_tz=None):
 	year = month = day = tzoffset = \
 	weekday = julian = week_of_year = None
 	hour = minute = second = fraction = 0
-	for key, val in found_dict.iteritems():
+	for key, val in found_dict.items():
 		if val is None: continue
 		# Directives not explicitly handled below:
 		#   c, x, X

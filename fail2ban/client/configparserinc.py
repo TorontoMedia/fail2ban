@@ -327,7 +327,7 @@ after = 1.conf
 			# mix it with defaults:
 			return set(opts.keys()) | set(self._defaults)
 		# only own option names:
-		return opts.keys()
+		return list(opts.keys())
 
 	def read(self, filenames, get_includes=True):
 		if not isinstance(filenames, list):
@@ -356,7 +356,7 @@ after = 1.conf
 					ret += i
 					# merge defaults and all sections to self:
 					alld.update(cfg.get_defaults())
-					for n, s in cfg.get_sections().iteritems():
+					for n, s in cfg.get_sections().items():
 						# conditional sections
 						cond = SafeConfigParserWithIncludes.CONDITIONAL_RE.match(n)
 						if cond:
@@ -366,14 +366,14 @@ after = 1.conf
 								del(s['__name__'])
 							except KeyError:
 								pass
-							for k in s.keys():
+							for k in list(s.keys()):
 								v = s.pop(k)
 								s[k + cond] = v
 						s2 = alls.get(n)
 						if isinstance(s2, dict):
 							# save previous known values, for possible using in local interpolations later:
 							self.merge_section('KNOWN/'+n, 
-								dict(filter(lambda i: i[0] in s, s2.iteritems())), '')
+								dict(filter(lambda i: i[0] in s, iter(s2.items()))), '')
 							# merge section
 							s2.update(s)
 						else:
@@ -400,7 +400,7 @@ after = 1.conf
 			sec.update(options)
 			return
 		sk = {}
-		for k, v in options.iteritems():
+		for k, v in options.items():
 			if not k.startswith(pref) and k != '__name__':
 				sk[pref+k] = v
 		sec.update(sk)
