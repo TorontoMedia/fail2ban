@@ -384,7 +384,7 @@ class JailReaderTest(LogCaptureTestCase):
 		self.assertEqual(('mail', {'a': ','}), extractOptions("mail[a=',']"))
 		self.assertEqual(('mail', {'a': 'b'}), extractOptions("mail[a=b, ]"))
 
-		self.assertRaises(ValueError, extractOptions ,'mail-how[')
+		self.assertRaises(ValueError, extractOptions, 'mail-how[')
 
 		self.assertRaises(ValueError, extractOptions, """mail[a="test with interim (wrong) "" quotes"]""")
 		self.assertRaises(ValueError, extractOptions, """mail[a='test with interim (wrong) '' quotes']""")
@@ -488,7 +488,7 @@ class JailReaderTest(LogCaptureTestCase):
 		open(f1, 'w').close()
 		# dangling link
 		f2 = os.path.join(d, 'f2')
-		os.symlink('nonexisting',f2)
+		os.symlink('nonexisting', f2)
 
 		# must be only f1
 		self.assertEqual(JailReader._glob(os.path.join(d, '*')), [f1])
@@ -824,7 +824,7 @@ class JailsReaderTest(LogCaptureTestCase):
 			# and it must be readable as a Filter
 			filterReader = FilterReader(filterName, jail, filterOpt, 
 				share_config=CONFIG_DIR_SHARE_CFG, basedir=CONFIG_DIR)
-			self.assertTrue(filterReader.read(),"Failed to read filter:" + filterName)		  # opens fine
+			self.assertTrue(filterReader.read(), "Failed to read filter:" + filterName)		  # opens fine
 			filterReader.getOptions({})	  # reads fine
 
 			#  test if filter has failregex set
@@ -970,7 +970,7 @@ class JailsReaderTest(LogCaptureTestCase):
 
 		# and there is logging information left to be passed into the
 		# server
-		self.assertSortedEqual(commands,[
+		self.assertSortedEqual(commands, [
 		  ['set', 'syslogsocket', 'auto'],
 		  ['set', 'loglevel', "INFO"],
 		  ['set', 'logtarget', '/var/log/fail2ban.log'],

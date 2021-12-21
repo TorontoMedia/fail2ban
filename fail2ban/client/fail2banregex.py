@@ -246,7 +246,7 @@ class Fail2banRegex(object):
 
 	def __init__(self, opts):
 		# set local protected members from given options:
-		self.__dict__.update(dict(('_'+o,v) for o,v in opts.__dict__.items()))
+		self.__dict__.update(dict(('_'+o, v) for o, v in opts.__dict__.items()))
 		self._opts = opts
 		self._maxlines_set = False		  # so we allow to override maxlines in cmdline
 		self._datepattern_set = False
@@ -538,7 +538,7 @@ class Fail2banRegex(object):
 		elif ofmt == 'row':
 			def _out(ret):
 				for r in ret:
-					output('[%r,\t%r,\t%r],' % (r[1],r[2],dict((k,v) for k, v in r[3].items() if k != 'matches')))
+					output('[%r,\t%r,\t%r],' % (r[1], r[2], dict((k, v) for k, v in r[3].items() if k != 'matches')))
 		elif '<' not in ofmt:
 			def _out(ret):
 				for r in ret:

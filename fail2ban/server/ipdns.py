@@ -152,7 +152,7 @@ class DNSUtils:
 	def getHostname(fqdn=True):
 		"""Get short hostname or fully-qualified hostname of host self"""
 		# try find cached own hostnames (this tuple-key cannot be used elsewhere):
-		key = ('self','hostname', fqdn)
+		key = ('self', 'hostname', fqdn)
 		name = DNSUtils.CACHE_ipToName.get(key)
 		# get it using different ways (hostname, fully-qualified or vice versa):
 		if name is None:
@@ -170,7 +170,7 @@ class DNSUtils:
 		return name
 
 	# key find cached own hostnames (this tuple-key cannot be used elsewhere):
-	_getSelfNames_key = ('self','dns')
+	_getSelfNames_key = ('self', 'dns')
 
 	@staticmethod
 	def getSelfNames():
@@ -187,7 +187,7 @@ class DNSUtils:
 		return names
 
 	# key to find cached own IPs (this tuple-key cannot be used elsewhere):
-	_getSelfIPs_key = ('self','ips')
+	_getSelfIPs_key = ('self', 'ips')
 
 	@staticmethod
 	def getSelfIPs():
@@ -215,7 +215,7 @@ class DNSUtils:
 		return value
 
 	# key to find cached value of IPv6 allowance (this tuple-key cannot be used elsewhere):
-	_IPv6IsAllowed_key = ('self','ipv6-allowed')
+	_IPv6IsAllowed_key = ('self', 'ipv6-allowed')
 
 	@staticmethod
 	def IPv6IsAllowed():
@@ -246,7 +246,7 @@ class IPAddr(object):
 	IP6_4COMPAT = None
 
 	# object attributes
-	__slots__ = '_family','_addr','_plen','_maskplen','_raw'
+	__slots__ = '_family', '_addr', '_plen', '_maskplen', '_raw'
 
 	# todo: make configurable the expired time and max count of cache entries:
 	CACHE_OBJ = Utils.Cache(maxCount=10000, maxTime=5*60)

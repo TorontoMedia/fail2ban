@@ -142,12 +142,12 @@ class Fail2BanDb(object):
 	# Note all SCRIPTS strings must end in ';' for py26 compatibility
 	_CREATE_SCRIPTS = (
 		 ('fail2banDb', "CREATE TABLE IF NOT EXISTS fail2banDb(version INTEGER);")
-		,('jails', "CREATE TABLE IF NOT EXISTS jails(" \
+		, ('jails', "CREATE TABLE IF NOT EXISTS jails(" \
 			"name TEXT NOT NULL UNIQUE, " \
 			"enabled INTEGER NOT NULL DEFAULT 1" \
 			");" \
 			"CREATE INDEX IF NOT EXISTS jails_name ON jails(name);")
-		,('logs', "CREATE TABLE IF NOT EXISTS logs(" \
+		, ('logs', "CREATE TABLE IF NOT EXISTS logs(" \
 			"jail TEXT NOT NULL, " \
 			"path TEXT, " \
 			"firstlinemd5 TEXT, " \
@@ -162,7 +162,7 @@ class Fail2BanDb(object):
 			#"journalmatch TEXT, " \
 			#"journlcursor TEXT, " \
 			#"lastfiletime INTEGER DEFAULT 0, " # is this easily available
-		,('bans', "CREATE TABLE IF NOT EXISTS bans(" \
+		, ('bans', "CREATE TABLE IF NOT EXISTS bans(" \
 			"jail TEXT NOT NULL, " \
 			"ip TEXT, " \
 			"timeofban INTEGER NOT NULL, " \
@@ -174,7 +174,7 @@ class Fail2BanDb(object):
 			"CREATE INDEX IF NOT EXISTS bans_jail_timeofban_ip ON bans(jail, timeofban);" \
 			"CREATE INDEX IF NOT EXISTS bans_jail_ip ON bans(jail, ip);" \
 			"CREATE INDEX IF NOT EXISTS bans_ip ON bans(ip);")
-		,('bips', "CREATE TABLE IF NOT EXISTS bips(" \
+		, ('bips', "CREATE TABLE IF NOT EXISTS bips(" \
 			"ip TEXT NOT NULL, " \
 			"jail TEXT NOT NULL, " \
 			"timeofban INTEGER NOT NULL, " \

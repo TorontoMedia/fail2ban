@@ -238,7 +238,7 @@ class FilterSystemd(JournalFilter): # pragma: systemd no cover
 				if monotonic is None:
 					monotonic = logentry.get('__MONOTONIC_TIMESTAMP')[0]
 				logelements.append("[%12.6f]" % monotonic.total_seconds())
-		msg = logentry.get('MESSAGE','')
+		msg = logentry.get('MESSAGE', '')
 		if isinstance(msg, list):
 			logelements.append(" ".join(uni_decode(v, enc) for v in msg))
 		else:

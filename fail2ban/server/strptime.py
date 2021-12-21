@@ -71,7 +71,7 @@ timeRE['ExM'] = r"(?P<M>[0-5]\d)"
 timeRE['ExS'] = r"(?P<S>[0-5]\d|6[0-1])"
 
 def _updateTimeRE():
-	def _getYearCentRE(cent=(0,3), distance=3, now=(MyTime.now(), MyTime.alternateNow)):
+	def _getYearCentRE(cent=(0, 3), distance=3, now=(MyTime.now(), MyTime.alternateNow)):
 		""" Build century regex for last year and the next years (distance).
 			
 		Thereby respect possible run in the test-cases (alternate date used there)
@@ -106,7 +106,7 @@ def _updateTimeRE():
 	# the next 3 years (for possible long uptime of fail2ban); thereby
 	# consider possible run in the test-cases (alternate date used there),
 	# so accept years: 20xx (from test-date or 2001 up to current century)
-	timeRE['ExY'] = r"(?P<Y>%s\d)" % _getYearCentRE(cent=(0,3), distance=3, 
+	timeRE['ExY'] = r"(?P<Y>%s\d)" % _getYearCentRE(cent=(0, 3), distance=3, 
 		now=(datetime.datetime.now(), datetime.datetime.fromtimestamp(
 					min(MyTime.alternateNowTime or 978393600, 978393600))
 				)

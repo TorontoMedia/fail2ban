@@ -372,11 +372,11 @@ class DatabaseTest(LogCaptureTestCase):
 			self.jail, FailTicket("127.0.0.1", MyTime.time() - 60, ["abc\n"]))
 		self.db.addBan(
 			self.jail, FailTicket("127.0.0.1", MyTime.time() - 40, ["abc\n"]))
-		self.assertEqual(len(self.db.getBans(jail=self.jail,bantime=50)), 1)
-		self.assertEqual(len(self.db.getBans(jail=self.jail,bantime=20)), 0)
+		self.assertEqual(len(self.db.getBans(jail=self.jail, bantime=50)), 1)
+		self.assertEqual(len(self.db.getBans(jail=self.jail, bantime=20)), 0)
 		# Negative values are for persistent bans, and such all bans should
 		# be returned
-		self.assertEqual(len(self.db.getBans(jail=self.jail,bantime=-1)), 2)
+		self.assertEqual(len(self.db.getBans(jail=self.jail, bantime=-1)), 2)
 
 	def testGetBansMerged_MaxMatches(self):
 		self.testAddJail()
@@ -427,7 +427,7 @@ class DatabaseTest(LogCaptureTestCase):
 			maxmatches=0)
 		self.assertEqual(len(ticket.getMatches()), 0)
 		# dbmaxmatches = 0, should retrieve 0 matches by last ban:
-		ticket.setMatches(["1","2","3"])
+		ticket.setMatches(["1", "2", "3"])
 		self.db.maxMatches = 0;
 		self.db.addBan(self.jail, ticket)
 		ticket = self.db.getCurrentBans(self.jail, "127.0.0.1", fromtime=MyTime.time()-100)

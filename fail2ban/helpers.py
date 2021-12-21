@@ -330,7 +330,7 @@ def splitwords(s):
 		return []
 	return list(filter(bool, [v.strip() for v in re.split('[ ,\n]+', s)]))
 
-if sys.version_info >= (3,5):
+if sys.version_info >= (3, 5):
 	eval(compile(r'''if 1:
 	def _merge_dicts(x, y):
 		"""Helper to merge dicts.
@@ -394,7 +394,7 @@ def extractOptions(option):
 			opt = optmatch.group(1)
 			if not opt: continue
 			value = [
-				val for val in optmatch.group(2,3,4) if val is not None][0]
+				val for val in optmatch.group(2, 3, 4) if val is not None][0]
 			option_opts[opt.strip()] = value.strip()
 	return option_name, option_opts
 

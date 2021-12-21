@@ -906,7 +906,7 @@ class Fail2banServerTest(Fail2banClientServerBase):
 		_write_action_cfg(actname="test-action1")
 		_write_action_cfg(actname="test-action2")
 
-		_write_jail_cfg(enabled=[1], actions=[1,2,3])
+		_write_jail_cfg(enabled=[1], actions=[1, 2, 3])
 		# append one wrong configured jail:
 		_write_file(pjoin(cfg, "jail.conf"), "a", "", "[broken-jail]", 
 			"", "filter = broken-jail-filter", "enabled = true")
@@ -943,7 +943,7 @@ class Fail2banServerTest(Fail2banClientServerBase):
 		
 		# enable both jails, 3 logs for jail1, etc...
 		self.pruneLog("[test-phase 1b]")
-		_write_jail_cfg(actions=[1,2])
+		_write_jail_cfg(actions=[1, 2])
 		if unittest.F2B.log_level < logging.DEBUG: # pragma: no cover
 			_out_file(test1log)
 		self.execCmd(SUCCESS, startparams, "reload")
@@ -1002,7 +1002,7 @@ class Fail2banServerTest(Fail2banClientServerBase):
 		# don't need action1 anymore:
 		_write_action_cfg(actname="test-action1", allow=False)
 		# leave action2 just to test restored interpolation:
-		_write_jail_cfg(actions=[2,3])
+		_write_jail_cfg(actions=[2, 3])
 		
 		self.pruneLog("[test-phase 2b]")
 		# write new failures:

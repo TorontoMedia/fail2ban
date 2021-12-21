@@ -59,7 +59,7 @@ class FilterReader(DefinitionInitConfigReader):
 		if (not self._initOpts.get('logtype') and 
 		    not self.has_option('Definition', 'logtype', False)
 		  ):
-			self._initOpts['logtype'] = ['file','journal'][int(backend.startswith("systemd"))]
+			self._initOpts['logtype'] = ['file', 'journal'][int(backend.startswith("systemd"))]
 
 	def convert(self):
 		stream = list()

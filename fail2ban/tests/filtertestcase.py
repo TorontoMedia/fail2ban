@@ -152,7 +152,7 @@ def _assert_correct_last_attempt(utest, filter_, output, count=None):
 	Test filter to contain target ticket
 	"""
 	# one or multiple tickets:
-	if not isinstance(output[0], (tuple,list)):
+	if not isinstance(output[0], (tuple, list)):
 		tickcount = 1
 		failcount = (count if count else output[1])
 	else:
@@ -184,7 +184,7 @@ def _assert_correct_last_attempt(utest, filter_, output, count=None):
 					break
 				tickcount -= 1
 
-	if not isinstance(output[0], (tuple,list)):
+	if not isinstance(output[0], (tuple, list)):
 		utest.assertEqual(len(found), 1)
 		_assert_equal_entries(utest, found[0], output, count)
 	else:
@@ -455,7 +455,7 @@ class IgnoreIP(LogCaptureTestCase):
 			MyTime.setTime(1572138000+3600)
 			#
 			self.pruneLog("[phase 1] simulate wrong TZ")
-			for i in (1,2,3):
+			for i in (1, 2, 3):
 				self.filter.processLineAndAdd('2019-10-27 02:00:00 fail from 192.0.2.15'); # +3 = 3
 			self.assertLogged(
 				"Detected a log entry 1h before the current time in operation mode. This looks like a timezone problem.",
@@ -465,7 +465,7 @@ class IgnoreIP(LogCaptureTestCase):
 			#
 			setattr(self.filter, "_next_simByTimeWarn", -1)
 			self.pruneLog("[phase 2] wrong TZ given in log")
-			for i in (1,2,3):
+			for i in (1, 2, 3):
 				self.filter.processLineAndAdd('2019-10-27 04:00:00 GMT fail from 192.0.2.16'); # +3 = 6
 			self.assertLogged(
 				"Detected a log entry 2h after the current time in operation mode. This looks like a timezone problem.",

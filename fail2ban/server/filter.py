@@ -800,7 +800,7 @@ class Filter(JailThread):
 			if (nfflgs & 4) == 0 and not mlfidGroups.get('mlfpending', 0):
 				mlfidGroups.pop("matches", None)
 			# overwrite multi-line failure with all values, available in fail:
-			mlfidGroups.update(((k,v) for k,v in fail.items() if v is not None))
+			mlfidGroups.update(((k, v) for k, v in fail.items() if v is not None))
 			# new merged failure data:
 			fail = mlfidGroups
 			# if forget (disconnect/reset) - remove cached entry:
@@ -1010,7 +1010,7 @@ class FileFilter(Filter):
 				if lastpos and not tail:
 					log.setPos(lastpos)
 			self.__logs[path] = log
-			logSys.info("Added logfile: %r (pos = %s, hash = %s)" , path, log.getPos(), log.getHash())
+			logSys.info("Added logfile: %r (pos = %s, hash = %s)", path, log.getPos(), log.getHash())
 			if autoSeek and not tail:
 				self.__autoSeek[path] = autoSeek
 			self._addLogPath(path)			# backend specific

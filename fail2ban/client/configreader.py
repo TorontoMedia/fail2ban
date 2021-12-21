@@ -46,7 +46,7 @@ def _OptionsTemplateGen(options):
 	Or it is a dict:
 		{name: [type, default], ...}
 	"""
-	if isinstance(options, (list,tuple)):
+	if isinstance(options, (list, tuple)):
 		for optname in options:
 			if len(optname) > 2:
 				opttype, optname, optvalue = optname
@@ -209,7 +209,7 @@ class ConfigReaderUnshared(SafeConfigParserWithIncludes):
 		if filename.startswith("./"): # pragma: no cover
 			filename = os.path.abspath(filename)
 		basename = os.path.join(self._basedir, filename)
-		logSys.debug("Reading configs for %s under %s " , filename, self._basedir)
+		logSys.debug("Reading configs for %s under %s ", filename, self._basedir)
 		config_files = [ basename + ".conf" ]
 
 		# possible further customizations under a .conf.d directory

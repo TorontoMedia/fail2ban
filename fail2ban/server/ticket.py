@@ -55,7 +55,7 @@ class Ticket(object):
 		self._time = time if time is not None else MyTime.time()
 		self._data = {'matches': matches or [], 'failures': 0}
 		if data is not None:
-			for k,v in data.items():
+			for k, v in data.items():
 				if v is not None:
 					self._data[k] = v
 		if ticket:
@@ -180,18 +180,18 @@ class Ticket(object):
 		if len(args) == 1:
 			# todo: if support >= 2.7 only:
 			# self._data = {k:v for k,v in args[0].iteritems() if v is not None}
-			self._data = dict([(k,v) for k,v in args[0].items() if v is not None])
+			self._data = dict([(k, v) for k, v in args[0].items() if v is not None])
 		# add k,v list or dict (merge):
 		elif len(args) == 2:
 			self._data.update((args,))
 		elif len(args) > 2:
-			self._data.update((k,v) for k,v in zip(*[iter(args)]*2))
+			self._data.update((k, v) for k, v in zip(*[iter(args)]*2))
 		if len(argv):
 			self._data.update(argv)
 		# filter (delete) None values:
 		# todo: if support >= 2.7 only:
 		# self._data = {k:v for k,v in self._data.iteritems() if v is not None}
-		self._data = dict([(k,v) for k,v in self._data.items() if v is not None])
+		self._data = dict([(k, v) for k, v in self._data.items() if v is not None])
 	
 	def getData(self, key=None, default=None):
 		# return whole data dict:
@@ -200,17 +200,17 @@ class Ticket(object):
 		# return default if not exists:
 		if not self._data:
 			return default
-		if not isinstance(key,(str,str,type(None),int,float,bool,complex)):
+		if not isinstance(key, (str, str, type(None), int, float, bool, complex)):
 			# return filtered by lambda/function:
 			if callable(key):
 				# todo: if support >= 2.7 only:
 				# return {k:v for k,v in self._data.iteritems() if key(k)}
-				return dict([(k,v) for k,v in self._data.items() if key(k)])
+				return dict([(k, v) for k, v in self._data.items() if key(k)])
 			# return filtered by keys:
 			if hasattr(key, '__iter__'):
 				# todo: if support >= 2.7 only:
 				# return {k:v for k,v in self._data.iteritems() if k in key}
-				return dict([(k,v) for k,v in self._data.items() if k in key])
+				return dict([(k, v) for k, v in self._data.items() if k in key])
 		# return single value of data:
 		return self._data.get(key, default)
 

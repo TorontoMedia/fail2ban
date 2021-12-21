@@ -114,9 +114,9 @@ class CallingMap(MutableMapping, object):
 	def _asdict(self, calculated=False, checker=None):
 		d = dict(self.data, **self.storage)
 		if not calculated:
-			return dict((n,v) for n,v in d.items() \
+			return dict((n, v) for n, v in d.items() \
 				if not callable(v) or n in self.CM_REPR_ITEMS)
-		for n,v in list(d.items()):
+		for n, v in list(d.items()):
 			if callable(v):
 				try:
 					# calculate:
@@ -417,7 +417,7 @@ class CommandAction(ActionBase):
 	def _operationExecuted(self, tag, family, *args):
 		""" Get, set or delete command of operation considering family.
 		"""
-		key = ('__eOpCmd',tag)
+		key = ('__eOpCmd', tag)
 		if not len(args): # get
 			if not callable(family): # pragma: no cover
 				return self.__substCache.get(key, {}).get(family)
@@ -450,7 +450,7 @@ class CommandAction(ActionBase):
 		res = True
 		err = 'Script error'
 		if not family: # all started:
-			family = [famoper for (famoper,v) in self.__started.items() if v]
+			family = [famoper for (famoper, v) in self.__started.items() if v]
 		for famoper in family:
 			try:
 				cmd = self._getOperation(tag, famoper)
@@ -497,7 +497,7 @@ class CommandAction(ActionBase):
 		v = self._properties.get('__families')
 		if v: return v
 		v = self._properties.get('families')
-		if v and not isinstance(v, (list,set)): # pragma: no cover - still unused
+		if v and not isinstance(v, (list, set)): # pragma: no cover - still unused
 			v = splitwords(v)
 		elif self._hasCondSection: # all conditional families:
 			# todo: check it is needed at all # common (resp. ipv4) + ipv6 if allowed:
@@ -630,7 +630,7 @@ class CommandAction(ActionBase):
 		and executes the resulting command.
 		"""
 		# collect started families, may be started on demand (conditional):
-		family = [f for (f,v) in self.__started.items() if v & 3 == 3]; # started and contains items
+		family = [f for (f, v) in self.__started.items() if v & 3 == 3]; # started and contains items
 		# if nothing contains items:
 		if not family: return True
 		# flush:
@@ -655,7 +655,7 @@ class CommandAction(ActionBase):
 		"""
 		# collect started families, if started on demand (conditional):
 		if family is None:
-			family = [f for (f,v) in self.__started.items() if v]
+			family = [f for (f, v) in self.__started.items() if v]
 			# if no started (on demand) actions:
 			if not family: return True
 			self.__started = {}

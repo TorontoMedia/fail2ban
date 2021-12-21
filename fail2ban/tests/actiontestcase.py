@@ -432,7 +432,7 @@ class CommandActionTest(LogCaptureTestCase):
 	def testExecuteActionChangeCtags(self):
 		self.assertRaises(AttributeError, getattr, self.__action, "ROST")
 		self.__action.ROST = "192.0.2.0"
-		self.assertEqual(self.__action.ROST,"192.0.2.0")
+		self.assertEqual(self.__action.ROST, "192.0.2.0")
 
 	def testExecuteActionUnbanAinfo(self):
 		aInfo = CallingMap({

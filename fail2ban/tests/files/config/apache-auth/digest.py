@@ -50,7 +50,7 @@ def preauth():
     r = requests.get(host + url)
     print(r)
     r.headers['www-authenticate'].split(', ')
-    return dict([ a.split('=',1) for a in r.headers['www-authenticate'].split(', ') ])
+    return dict([ a.split('=', 1) for a in r.headers['www-authenticate'].split(', ') ])
 
 
 url='/digest/'
@@ -76,18 +76,18 @@ r = auth(v)
 
 # [Sun Jul 28 21:41:20 2013] [error] [client 127.0.0.1] Digest: unknown algorithm `super funky chicken' received: /digest/
 
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 v['algorithm'] = algorithm
 
 
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 
 nonce = v['nonce']
 v['nonce']=v['nonce'][5:-5]
 
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 
 # [Sun Jul 28 21:05:31.178340 2013] [auth_digest:error] [pid 24224:tid 139895539455744] [client 127.0.0.1:56906] AH01793: invalid qop `auth' received: /digest/qop_none/
 
@@ -95,7 +95,7 @@ print((r.status_code,r.headers, r.text))
 v['nonce']=nonce[0:11] + 'ZZZ' + nonce[14:]
 
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 
 #[Sun Jul 28 21:18:11.769228 2013] [auth_digest:error] [pid 24752:tid 139895505884928] [client 127.0.0.1:56964] AH01776: invalid nonce b9YAiJDiBAZZZ1b1abe02d20063ea3b16b544ea1b0d981c1bafe received - hash is not d42d824dee7aaf50c3ba0a7c6290bd453e3dd35b
 
@@ -107,7 +107,7 @@ import time
 time.sleep(1)
 
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 
 # Obtained by putting the following code in modules/aaa/mod_auth_digest.c
 # in the function initialize_secret
@@ -140,12 +140,12 @@ v=preauth()
 print((v['nonce']))
 realm = v['Digest realm'][1:-1]
 
-(t,) = struct.unpack('l',base64.b64decode(v['nonce'][1:13]))
+(t,) = struct.unpack('l', base64.b64decode(v['nonce'][1:13]))
 
 # whee, time travel
 t = t + 5540
 
-timepac = base64.b64encode(struct.pack('l',t))
+timepac = base64.b64encode(struct.pack('l', t))
 
 s.update(realm)
 s.update(timepac)
@@ -156,13 +156,13 @@ print(v)
 
 r = auth(v)
 #[Mon Jul 29 02:12:55.539813 2013] [auth_digest:error] [pid 9647:tid 139895522670336] [client 127.0.0.1:58474] AH01777: invalid nonce 59QJppTiBAA=b08983fd166ade9840407df1b0f75b9e6e07d88d received - user attempted time travel
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 
 url='/digest_onetime/'
 v=preauth()
 
 # Need opaque header handling in auth
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))
 r = auth(v)
-print((r.status_code,r.headers, r.text))
+print((r.status_code, r.headers, r.text))

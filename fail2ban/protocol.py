@@ -141,7 +141,7 @@ protocol = [
 ["get <JAIL> maxmatches", "gets the max number of matches stored in memory per ticket in <JAIL>"], 
 ["get <JAIL> maxlines", "gets the number of lines to buffer for <JAIL>"],
 ["get <JAIL> actions", "gets a list of actions for <JAIL>"],
-["", "COMMAND ACTION INFORMATION",""],
+["", "COMMAND ACTION INFORMATION", ""],
 ["get <JAIL> action <ACT> actionstart", "gets the start command for the action <ACT> for <JAIL>"],
 ["get <JAIL> action <ACT> actionstop", "gets the stop command for the action <ACT> for <JAIL>"],
 ["get <JAIL> action <ACT> actioncheck", "gets the check command for the action <ACT> for <JAIL>"],

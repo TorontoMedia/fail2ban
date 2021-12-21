@@ -55,7 +55,7 @@ CONFIG_DIR = os.environ.get('FAIL2BAN_CONFIG_DIR', None)
 
 if not CONFIG_DIR:
 # Use heuristic to figure out where configuration files are
-	if os.path.exists(os.path.join('config','fail2ban.conf')):
+	if os.path.exists(os.path.join('config', 'fail2ban.conf')):
 		CONFIG_DIR = 'config'
 	else: # pragma: no cover - normally unreachable
 		CONFIG_DIR = '/etc/fail2ban'

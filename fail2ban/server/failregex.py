@@ -75,7 +75,7 @@ RH4TAG = {
 	"CIDR":			R_HOST[RI_CIDR],
 	"F-CIDR/":	R_HOST[RI_CIDR],
 	"SUBNET":		R_HOST[RI_SUBNET],
-	"F-SUBNET/":R_HOST[RI_SUBNET],
+	"F-SUBNET/": R_HOST[RI_SUBNET],
 	# separated dns (self closed, closed):
 	"DNS":			R_HOST[RI_DNS],
 	"F-DNS/":		R_HOST[RI_DNS],
@@ -148,9 +148,9 @@ class Regex:
 				if n:
 					g, n = n.group(1), mapTag2Opt(n.group(2))
 					if g == ALTNAME_PRE:
-						self._altValues.append((k,n))
+						self._altValues.append((k, n))
 					else:
-						self._tupleValues.append((k,n))
+						self._tupleValues.append((k, n))
 			self._altValues.sort()
 			self._tupleValues.sort()
 			self._altValues = self._altValues if len(self._altValues) else None
@@ -307,19 +307,19 @@ class Regex:
 		#fail = fail.copy()
 		# merge alternate values (e. g. 'alt_user_1' -> 'user' or 'alt_host' -> 'host'):
 		if self._altValues:
-			for k,n in self._altValues:
+			for k, n in self._altValues:
 				v = fail.get(k)
 				if v and not fail.get(n):
 					fail[n] = v
 		# combine tuple values (e. g. 'id', 'tuple_id' ... 'tuple_id_N' -> 'id'):
 		if self._tupleValues:
-			for k,n in self._tupleValues:
+			for k, n in self._tupleValues:
 				v = fail.get(k)
 				t = fail.get(n)
 				if isinstance(t, tuple):
 					t += (v,)
 				else:
-					t = (t,v,)
+					t = (t, v,)
 				fail[n] = t
 		return fail
 

@@ -361,7 +361,7 @@ class Transmitter:
 			return self.__server.getBanTimeExtra(name, opt)
 		elif command[1] == "banip":
 			value = command[2:]
-			return self.__server.setBanIP(name,value)
+			return self.__server.setBanIP(name, value)
 		elif command[1] == "unbanip":
 			ifexists = True
 			if command[2] != "--report-absent":

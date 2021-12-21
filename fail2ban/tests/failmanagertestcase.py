@@ -237,9 +237,9 @@ class FailmanagerComplex(unittest.TestCase):
 				#return (int)(struct.unpack('I', struct.pack("BBBB",*self))[0])
 				return (int)(self[0] << 24 | self[1] << 16 | self[2] << 8 | self[3])
 		i = 0
-		c = [127,0,0,0]
+		c = [127, 0, 0, 0]
 		while i < maxips:
-			for n in range(3,0,-1):
+			for n in range(3, 0, -1):
 				if c[n] < 255:
 					c[n] += 1
 					break

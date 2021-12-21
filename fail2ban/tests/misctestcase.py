@@ -106,7 +106,7 @@ class SetupTest(unittest.TestCase):
 		try:
 			# try dry-run:
 			os.system("%s %s --dry-run install --root=%s%s"
-					  % (sys.executable, self.setup , tmp, supdbgout))
+					  % (sys.executable, self.setup, tmp, supdbgout))
 			# check nothing was created:
 			self.assertTrue(not os.listdir(tmp))
 		finally:

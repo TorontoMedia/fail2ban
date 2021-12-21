@@ -368,11 +368,11 @@ class Transmitter(TransmitterBase):
 		# Unban IP which isn't banned (error):
 		self.assertEqual(
 			self.transm.proceed(
-				["set", self.jailName, "unbanip", "--report-absent", "192.0.2.255"])[0],1)
+				["set", self.jailName, "unbanip", "--report-absent", "192.0.2.255"])[0], 1)
 		# ... (no error, IPs logged only):
 		self.assertEqual(
 			self.transm.proceed(
-				["set", self.jailName, "unbanip", "192.0.2.255", "192.0.2.254"]),(0, 0))
+				["set", self.jailName, "unbanip", "192.0.2.255", "192.0.2.254"]), (0, 0))
 		self.assertLogged("192.0.2.255 is not banned", "192.0.2.254 is not banned", all=True, wait=True)
 
 	def testJailAttemptIP(self):
@@ -388,7 +388,7 @@ class Transmitter(TransmitterBase):
 				self.assertEqual(attempt(ip, ["test failure %d" % i]), (0, 1))
 		self.assertLogged("192.0.2.1:2", "192.0.2.2:2", all=True, wait=True)
 		# this 3 attempts at once should cause a ban:
-		self.assertEqual(attempt(ip, ["test failure %d" % i for i in (3,4,5)]), (0, 1))
+		self.assertEqual(attempt(ip, ["test failure %d" % i for i in (3, 4, 5)]), (0, 1))
 		self.assertLogged("192.0.2.2:5", wait=True)
 		# resulted to ban for "192.0.2.2" but not for "192.0.2.1":
 		self.assertLogged("Ban 192.0.2.2", wait=True)
@@ -771,7 +771,7 @@ class Transmitter(TransmitterBase):
 			(0, None))
 		self.assertEqual(
 			self.transm.proceed(
-				["set", self.jailName, "delaction", "Doesn't exist"])[0],1)
+				["set", self.jailName, "delaction", "Doesn't exist"])[0], 1)
 
 	def testPythonActionMethodsAndProperties(self):
 		action = "TestCaseAction"
@@ -810,19 +810,19 @@ class Transmitter(TransmitterBase):
 			(0, 'Hello world! another value'))
 
 	def testNOK(self):
-		self.assertEqual(self.transm.proceed(["INVALID", "COMMAND"])[0],1)
+		self.assertEqual(self.transm.proceed(["INVALID", "COMMAND"])[0], 1)
 
 	def testSetNOK(self):
 		self.assertEqual(
-			self.transm.proceed(["set", "INVALID", "COMMAND"])[0],1)
+			self.transm.proceed(["set", "INVALID", "COMMAND"])[0], 1)
 
 	def testGetNOK(self):
 		self.assertEqual(
-			self.transm.proceed(["get", "INVALID", "COMMAND"])[0],1)
+			self.transm.proceed(["get", "INVALID", "COMMAND"])[0], 1)
 
 	def testStatusNOK(self):
 		self.assertEqual(
-			self.transm.proceed(["status", "INVALID", "COMMAND"])[0],1)
+			self.transm.proceed(["status", "INVALID", "COMMAND"])[0], 1)
 
 	def testJournalMatch(self): # pragma: systemd no cover
 		if not filtersystemd: # pragma: no cover
@@ -1002,7 +1002,7 @@ class TransmitterLogging(TransmitterBase):
 				l.warning("After file moved")
 				self.assertEqual(self.transm.proceed(["flushlogs"]), (0, "rolled over"))
 				l.warning("After flushlogs")
-				with open(fn2,'r') as f:
+				with open(fn2, 'r') as f:
 					line1 = next(f)
 					if line1.find('Changed logging target to') >= 0:
 						line1 = next(f)
@@ -1017,7 +1017,7 @@ class TransmitterLogging(TransmitterBase):
 							self.fail("Exception StopIteration or Command: ['flushlogs'] expected. Got: %s" % n)
 					except StopIteration:
 						pass # on higher debugging levels this is expected
-				with open(fn,'r') as f:
+				with open(fn, 'r') as f:
 					line1 = next(f)
 					if line1.find('rollover performed on') >= 0:
 						line1 = next(f)
@@ -1081,59 +1081,59 @@ class RegexTests(unittest.TestCase):
 		# e.g. if we made it optional.
 		fr = FailRegex(r'%%<HOST>?')
 		self.assertFalse(fr.hasMatched())
-		fr.search([('%%',"","")])
+		fr.search([('%%', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertRaises(RegexException, fr.getHost)
 		# The same as above but using separated IPv4/IPv6 expressions
 		fr = FailRegex(r'%%inet(?:=<F-IP4/>|inet6=<F-IP6/>)?')
 		self.assertFalse(fr.hasMatched())
-		fr.search([('%%inet=test',"","")])
+		fr.search([('%%inet=test', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertRaises(RegexException, fr.getHost)
 		# Success case: using separated IPv4/IPv6 expressions (no HOST)
 		fr = FailRegex(r'%%(?:inet(?:=<IP4>|6=<IP6>)?|dns=<DNS>?)')
 		self.assertFalse(fr.hasMatched())
-		fr.search([('%%inet=192.0.2.1',"","")])
+		fr.search([('%%inet=192.0.2.1', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertEqual(fr.getHost(), '192.0.2.1')
-		fr.search([('%%inet6=2001:DB8::',"","")])
+		fr.search([('%%inet6=2001:DB8::', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertEqual(fr.getHost(), '2001:DB8::')
-		fr.search([('%%dns=example.com',"","")])
+		fr.search([('%%dns=example.com', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertEqual(fr.getHost(), 'example.com')
 		# Success case: using user as failure-id
 		fr = FailRegex(r'^test id group: user:\(<F-ID>[^\)]+</F-ID>\)$')
 		self.assertFalse(fr.hasMatched())
-		fr.search([('test id group: user:(test login name)',"","")])
+		fr.search([('test id group: user:(test login name)', "", "")])
 		self.assertTrue(fr.hasMatched())
 		self.assertEqual(fr.getFailID(), 'test login name')
 		# Success case: subnet with IPAddr (IP and subnet) conversion:
 		fr = FailRegex(r'%%net=<SUBNET>')
-		fr.search([('%%net=192.0.2.1',"","")])
+		fr.search([('%%net=192.0.2.1', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('192.0.2.1', 'inet4'))
-		fr.search([('%%net=192.0.2.1/24',"","")])
+		fr.search([('%%net=192.0.2.1/24', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('192.0.2.0/24', 'inet4'))
-		fr.search([('%%net=2001:DB8:FF:FF::1',"","")])
+		fr.search([('%%net=2001:DB8:FF:FF::1', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('2001:db8:ff:ff::1', 'inet6'))
-		fr.search([('%%net=2001:DB8:FF:FF::1/60',"","")])
+		fr.search([('%%net=2001:DB8:FF:FF::1/60', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('2001:db8:ff:f0::/60', 'inet6'))
 		# CIDR:
 		fr = FailRegex(r'%%ip="<ADDR>", mask="<CIDR>?"')
-		fr.search([('%%ip="192.0.2.2", mask=""',"","")])
+		fr.search([('%%ip="192.0.2.2", mask=""', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('192.0.2.2', 'inet4'))
-		fr.search([('%%ip="192.0.2.2", mask="24"',"","")])
+		fr.search([('%%ip="192.0.2.2", mask="24"', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('192.0.2.0/24', 'inet4'))
-		fr.search([('%%ip="2001:DB8:2FF:FF::1", mask=""',"","")])
+		fr.search([('%%ip="2001:DB8:2FF:FF::1", mask=""', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('2001:db8:2ff:ff::1', 'inet6'))
-		fr.search([('%%ip="2001:DB8:2FF:FF::1", mask="60"',"","")])
+		fr.search([('%%ip="2001:DB8:2FF:FF::1", mask="60"', "", "")])
 		ip = fr.getIP()
 		self.assertEqual((ip, ip.familyStr), ('2001:db8:2ff:f0::/60', 'inet6'))
 
