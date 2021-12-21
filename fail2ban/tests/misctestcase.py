@@ -29,7 +29,7 @@ import tempfile
 import shutil
 import fnmatch
 from glob import glob
-from StringIO import StringIO
+from io import StringIO
 
 from .utils import LogCaptureTestCase, logSys as DefLogSys
 

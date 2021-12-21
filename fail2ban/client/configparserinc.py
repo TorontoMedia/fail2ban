@@ -62,7 +62,7 @@ if sys.version_info >= (3,): # pragma: 2.x no cover
 					parser, option, accum, rest, section, map, *args, **kwargs)
 
 else: # pragma: 3.x no cover
-	from ConfigParser import SafeConfigParser, \
+	from configparser import SafeConfigParser, \
 		InterpolationMissingOptionError, NoOptionError, NoSectionError
 
 	# Interpolate missing known/option as option from default section

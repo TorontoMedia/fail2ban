@@ -26,7 +26,7 @@ __license__ = "GPL"
 import logging
 import math
 import random
-import Queue
+import queue
 
 from .actions import Actions
 from ..helpers import getLogger, _as_bool, extractOptions, MyTime
@@ -76,7 +76,7 @@ class Jail(object):
 							"might not function correctly. Please shorten"
 							% name)
 		self.__name = name
-		self.__queue = Queue.Queue()
+		self.__queue = queue.Queue()
 		self.__filter = None
 		# Extra parameters for increase ban time
 		self._banExtra = {};
@@ -219,7 +219,7 @@ class Jail(object):
 		try:
 			ticket = self.__queue.get(False)
 			return ticket
-		except Queue.Empty:
+		except queue.Empty:
 			return False
 
 	def setBanTimeExtra(self, opt, value):
