@@ -298,7 +298,7 @@ class IPAddr(object):
 			raise ValueError("invalid ipstr %r, too many plen representation" % (ipstr,))
 		if "." in s[1] or ":" in s[1]: # 255.255.255.0 resp. ffff:: style mask
 			s[1] = IPAddr.masktoplen(s[1])
-		s[1] = long(s[1])
+		s[1] = int(s[1])
 		return s
 		
 	def __init(self, ipstr, cidr=CIDR_UNSPEC):
