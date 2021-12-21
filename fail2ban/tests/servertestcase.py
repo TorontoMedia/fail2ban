@@ -127,14 +127,14 @@ class TransmitterBase(LogCaptureTestCase):
 			self.transm.proceed(["get", jail, cmd]), (0, []))
 		for n, value in enumerate(values):
 			ret = self.transm.proceed(["set", jail, cmdAdd, value])
-			self.assertSortedEqual((ret[0], map(str, ret[1])), (0, map(str, values[:n+1])), level=2)
+			self.assertSortedEqual((ret[0], list(map(str, ret[1]))), (0, list(map(str, values[:n+1]))), level=2)
 			ret = self.transm.proceed(["get", jail, cmd])
-			self.assertSortedEqual((ret[0], map(str, ret[1])), (0, map(str, values[:n+1])), level=2)
+			self.assertSortedEqual((ret[0], list(map(str, ret[1]))), (0, list(map(str, values[:n+1]))), level=2)
 		for n, value in enumerate(values):
 			ret = self.transm.proceed(["set", jail, cmdDel, value])
-			self.assertSortedEqual((ret[0], map(str, ret[1])), (0, map(str, values[n+1:])), level=2)
+			self.assertSortedEqual((ret[0], list(map(str, ret[1]))), (0, list(map(str, values[n+1:]))), level=2)
 			ret = self.transm.proceed(["get", jail, cmd])
-			self.assertSortedEqual((ret[0], map(str, ret[1])), (0, map(str, values[n+1:])), level=2)
+			self.assertSortedEqual((ret[0], list(map(str, ret[1]))), (0, list(map(str, values[n+1:]))), level=2)
 
 	def jailAddDelRegexTest(self, cmd, inValues, outValues, jail):
 		cmdAdd = "add" + cmd

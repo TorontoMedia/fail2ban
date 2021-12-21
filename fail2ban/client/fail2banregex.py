@@ -639,9 +639,9 @@ class Fail2banRegex(object):
 					ans = [[]]
 					for arg in [l, regexlist]:
 						ans = [ x + [y] for x in ans for y in arg ]
-					b = map(lambda a: a[0] +  ' | ' + a[1].getFailRegex() + ' |  ' + 
+					b = [a[0] +  ' | ' + a[1].getFailRegex() + ' |  ' + 
 						debuggexURL(self.encode_line(a[0]), a[1].getFailRegex(), 
-							multiline, self._opts.usedns), ans)
+							multiline, self._opts.usedns) for a in ans]
 					pprint_list([x.rstrip() for x in b], header)
 				else:
 					output( "%s too many to print.  Use --print-all-%s " \

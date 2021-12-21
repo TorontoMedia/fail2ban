@@ -258,7 +258,7 @@ def testSampleRegexsFactory(name, basedir):
 						self.assertTrue(faildata.get('match', False), 
 							"Line matched when shouldn't have")
 						self.assertEqual(len(ret), 1,
-							"Multiple regexs matched %r" % (map(lambda x: x[0], ret)))
+							"Multiple regexs matched %r" % ([x[0] for x in ret]))
 
 						for ret in ret:
 							failregex, fid, fail2banTime, fail = ret

@@ -233,7 +233,7 @@ class Regex:
 	#
 	@staticmethod
 	def _tupleLinesBuf(tupleLines):
-		return "\n".join(map(lambda v: "".join(v[::2]), tupleLines)) + "\n"
+		return "\n".join(["".join(v[::2]) for v in tupleLines]) + "\n"
 
 	##
 	# Searches the regular expression.

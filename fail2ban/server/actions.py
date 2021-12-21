@@ -217,7 +217,7 @@ class Actions(JailThread, Mapping):
 			return lst
 		if len(ids) == 1:
 			return 1 if ids[0] in lst else 0
-		return map(lambda ip: 1 if ip in lst else 0, ids)
+		return [1 if ip in lst else 0 for ip in ids]
 
 	def getBanList(self, withTime=False):
 		"""Returns the list of banned IP addresses.

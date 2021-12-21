@@ -327,7 +327,7 @@ def splitwords(s):
 	"""
 	if not s:
 		return []
-	return list(filter(bool, map(lambda v: v.strip(), re.split('[ ,\n]+', s))))
+	return list(filter(bool, [v.strip() for v in re.split('[ ,\n]+', s)]))
 
 if sys.version_info >= (3,5):
 	eval(compile(r'''if 1:
