@@ -221,7 +221,7 @@ class ConfigReaderUnshared(SafeConfigParserWithIncludes):
 		config_files += sorted(glob.glob('%s/*.local' % config_dir))
 
 		# choose only existing ones
-		config_files = filter(os.path.exists, config_files)
+		config_files = list(filter(os.path.exists, config_files))
 
 		if len(config_files):
 			# at least one config exists and accessible

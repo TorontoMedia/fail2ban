@@ -143,9 +143,7 @@ class Regex:
 			self._regex = regex
 			self._altValues = []
 			self._tupleValues = []
-			for k in filter(
-				lambda k: len(k) > len(COMPLNAME_PRE[0]), self._regexObj.groupindex
-			):
+			for k in [k for k in self._regexObj.groupindex if len(k) > len(COMPLNAME_PRE[0])]:
 				n = COMPLNAME_CRE.match(k)
 				if n:
 					g, n = n.group(1), mapTag2Opt(n.group(2))

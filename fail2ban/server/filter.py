@@ -307,7 +307,7 @@ class Filter(JailThread):
 			dd = DateDetector()
 			dd.default_tz = self.__logtimezone
 			if not isinstance(pattern, (list, tuple)):
-				pattern = filter(bool, map(str.strip, re.split('\n+', pattern)))
+				pattern = list(filter(bool, map(str.strip, re.split('\n+', pattern))))
 			for pattern in pattern:
 				dd.appendTemplate(pattern)
 			self.dateDetector = dd

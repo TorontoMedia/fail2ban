@@ -373,7 +373,7 @@ after = 1.conf
 						if isinstance(s2, dict):
 							# save previous known values, for possible using in local interpolations later:
 							self.merge_section('KNOWN/'+n, 
-								dict(filter(lambda i: i[0] in s, iter(s2.items()))), '')
+								dict([i for i in iter(s2.items()) if i[0] in s]), '')
 							# merge section
 							s2.update(s)
 						else:
