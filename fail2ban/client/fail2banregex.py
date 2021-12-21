@@ -40,7 +40,7 @@ import os
 import shlex
 import sys
 import time
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from optparse import OptionParser, Option
 
 from configparser import NoOptionError, NoSectionError, MissingSectionHeaderError
@@ -67,7 +67,7 @@ def debuggexURL(sample, regex, multiline=False, useDns="yes"):
 		'flavor': 'python'
 	}
 	if multiline: args['flags'] = 'm'
-	return 'https://www.debuggex.com/?' + urllib.urlencode(args)
+	return 'https://www.debuggex.com/?' + urllib.parse.urlencode(args)
 
 def output(args): # pragma: no cover (overriden in test-cases)
 	print(args)
