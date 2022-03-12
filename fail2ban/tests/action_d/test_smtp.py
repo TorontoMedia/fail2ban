@@ -23,13 +23,9 @@ import threading
 import unittest
 import re
 import sys
-if sys.version_info >= (3, 3):
-	import importlib
-else:
-	import imp
+import importlib
 
 from ..dummyjail import DummyJail
-
 from ..utils import CONFIG_DIR, asyncserver, Utils, uni_decode
 
 class TestSMTPServer(smtpd.SMTPServer):
@@ -57,12 +53,8 @@ class SMTPActionTest(unittest.TestCase):
 		self.jail = DummyJail()
 		pythonModule = os.path.join(CONFIG_DIR, "action.d", "smtp.py")
 		pythonModuleName = os.path.basename(pythonModule.rstrip(".py"))
-		if sys.version_info >= (3, 3):
-			customActionModule = importlib.machinery.SourceFileLoader(
-				pythonModuleName, pythonModule).load_module()
-		else:
-			customActionModule = imp.load_source(
-				pythonModuleName, pythonModule)
+		customActionModule = importlib.machinery.SourceFileLoader(
+			pythonModuleName, pythonModule).load_module()
 
 		self.smtpd = TestSMTPServer(("localhost", 0), None)
 		port = self.smtpd.socket.getsockname()[1]

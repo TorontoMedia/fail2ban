@@ -29,49 +29,33 @@ import re
 import sys
 from ..helpers import getLogger
 
-if sys.version_info >= (3,): # pragma: 2.x no cover
 
-	# SafeConfigParser deprecated from Python 3.2 (renamed to ConfigParser)
-	from configparser import ConfigParser as SafeConfigParser, BasicInterpolation, \
-		InterpolationMissingOptionError, NoOptionError, NoSectionError
+# SafeConfigParser deprecated from Python 3.2 (renamed to ConfigParser)
+from configparser import ConfigParser as SafeConfigParser, BasicInterpolation, \
+	InterpolationMissingOptionError, NoOptionError, NoSectionError
 
-	# And interpolation of __name__ was simply removed, thus we need to
-	# decorate default interpolator to handle it
-	class BasicInterpolationWithName(BasicInterpolation):
-		"""Decorator to bring __name__ interpolation back.
-
+# And interpolation of __name__ was simply removed, thus we need to
+# decorate default interpolator to handle it
+class BasicInterpolationWithName(BasicInterpolation):
+	"""Decorator to bring __name__ interpolation back.
 		Original handling of __name__ was removed because of
-		functional deficiencies: http://bugs.python.org/issue10489
-
+	functional deficiencies: http://bugs.python.org/issue10489
 		commit v3.2a4-105-g61f2761
-		Author: Lukasz Langa <lukasz@langa.pl>
-		Date:	Sun Nov 21 13:41:35 2010 +0000
-
+	Author: Lukasz Langa <lukasz@langa.pl>
+	Date:	Sun Nov 21 13:41:35 2010 +0000
 		Issue #10489: removed broken `__name__` support from configparser
-
 		But should be fine to reincarnate for our use case
-		"""
-		def _interpolate_some(self, parser, option, accum, rest, section, map,
-							  *args, **kwargs):
-			if section and not (__name__ in map):
-				map = map.copy()		  # just to be safe
-				map['__name__'] = section
-				# try to wrap section options like %(section/option)s:
-				parser._map_section_options(section, option, rest, map)
-				return super(BasicInterpolationWithName, self)._interpolate_some(
-					parser, option, accum, rest, section, map, *args, **kwargs)
+	"""
+	def _interpolate_some(self, parser, option, accum, rest, section, map,
+						  *args, **kwargs):
+		if section and not (__name__ in map):
+			map = map.copy()		  # just to be safe
+			map['__name__'] = section
+			# try to wrap section options like %(section/option)s:
+			parser._map_section_options(section, option, rest, map)
+			return super(BasicInterpolationWithName, self)._interpolate_some(
+				parser, option, accum, rest, section, map, *args, **kwargs)
 
-else: # pragma: 3.x no cover
-	from configparser import SafeConfigParser, \
-		InterpolationMissingOptionError, NoOptionError, NoSectionError
-
-	# Interpolate missing known/option as option from default section
-	SafeConfigParser._cp_interpolate_some = SafeConfigParser._interpolate_some
-	def _interpolate_some(self, option, accum, rest, section, map, *args, **kwargs):
-		# try to wrap section options like %(section/option)s:
-		self._map_section_options(section, option, rest, map)
-		return self._cp_interpolate_some(option, accum, rest, section, map, *args, **kwargs)
-	SafeConfigParser._interpolate_some = _interpolate_some
 
 def _expandConfFilesWithLocal(filenames):
 	"""Expands config files with local extension.
@@ -129,20 +113,14 @@ after = 1.conf
 
 	CONDITIONAL_RE = re.compile(r"^(\w+)(\?.+)$")
 
-	if sys.version_info >= (3, 2):
-		# overload constructor only for fancy new Python3's
-		def __init__(self, share_config=None, *args, **kwargs):
-			kwargs = kwargs.copy()
-			kwargs['interpolation'] = BasicInterpolationWithName()
-			kwargs['inline_comment_prefixes'] = ";"
-			super(SafeConfigParserWithIncludes, self).__init__(
-				*args, **kwargs)
-			self._cfg_share = share_config
+	def __init__(self, share_config=None, *args, **kwargs):
+		kwargs = kwargs.copy()
+		kwargs['interpolation'] = BasicInterpolationWithName()
+		kwargs['inline_comment_prefixes'] = ";"
+		super(SafeConfigParserWithIncludes, self).__init__(
+			*args, **kwargs)
+		self._cfg_share = share_config
 
-	else:
-		def __init__(self, share_config=None, *args, **kwargs):
-			SafeConfigParser.__init__(self, *args, **kwargs)
-			self._cfg_share = share_config
 
 	def get_ex(self, section, option, raw=False, vars={}):
 		"""Get an option value for a given section.
@@ -385,10 +363,8 @@ after = 1.conf
 		if logSys.getEffectiveLevel() <= logLevel:
 			logSys.log(logLevel, "    Reading file: %s", fileNamesFull[0])
 		# read file(s) :
-		if sys.version_info >= (3, 2): # pragma: no cover
-			return SafeConfigParser.read(self, fileNamesFull, encoding='utf-8')
-		else:
-			return SafeConfigParser.read(self, fileNamesFull)
+		return SafeConfigParser.read(self, fileNamesFull, encoding='utf-8')
+
 
 	def merge_section(self, section, options, pref=None):
 		alls = self.get_sections()
